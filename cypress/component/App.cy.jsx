@@ -1,9 +1,9 @@
 import React from 'react'
-import App from './App'
+import Test from './../../src/components/Test';
 
 describe('<App />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<App />)
+    cy.mount(<Test />)
   })
 })
