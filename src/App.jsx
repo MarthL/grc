@@ -1,5 +1,5 @@
 import './App.css';
-import Test from './components/Test';
+import Navbar from './components/Navbar/Navbar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -15,7 +15,8 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <div>
-        <Test />
+        <Navbar />
+        {/* content */}
       </div>
     </ThemeProvider>
   );
