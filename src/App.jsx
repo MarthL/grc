@@ -1,6 +1,8 @@
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Corpus from './components/Corpus';
+import { Container } from '@mui/system';
 import CssBaseline from '@mui/material/CssBaseline';
 
 const darkTheme = createTheme({
@@ -14,10 +16,9 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <div>
         <Navbar />
+        <Corpus />
         {/* content */}
-      </div>
     </ThemeProvider>
   );
 }
