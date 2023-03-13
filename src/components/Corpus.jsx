@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-const Corpus = () => {
+export const Corpus = () => {
   return(
     <>
 <Typography paragraph>
@@ -33,5 +33,3 @@ const Corpus = () => {
 </>
 )
 }
-
-export default Corpus;
