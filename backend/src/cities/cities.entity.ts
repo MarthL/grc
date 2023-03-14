@@ -3,9 +3,6 @@ import { Column, Table, Model } from 'sequelize-typescript';
 @Table
 export class Cities extends Model<Cities> {
   @Column
-  ville_id: number;
-
-  @Column
   ville_departement: number;
 
   @Column

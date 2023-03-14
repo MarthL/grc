@@ -11,6 +11,9 @@ export const databaseProviders = [
         port: 3306,
         username: 'root',
         database: 'grc_city',
+        define: {
+          timestamps: false,
+        },
       });
       sequelize.addModels([Cities]);
       await sequelize.sync();
