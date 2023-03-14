@@ -7,11 +7,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Cities } from './cities/cities.entity';
 import { databaseProviders } from './provider/database.provider';
 import { CitiesController } from './cities/cities.controller';
+import { citiesProviders } from './cities/cities.provider';
 
 @Module({
   imports: [CitiesModule],
   controllers: [],
-  providers: [AppService, ...databaseProviders],
+  providers: [AppService, ...databaseProviders, ...citiesProviders],
   exports: [...databaseProviders],
 })
 export class AppModule {}
