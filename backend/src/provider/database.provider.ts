@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Sequelize } from 'sequelize-typescript';
+import Cities from 'src/cities/cities.entity';
 
 export const databaseProviders = [
   {
@@ -12,7 +13,7 @@ export const databaseProviders = [
         username: 'root',
         database: 'nest',
       });
-      sequelize.addModels([]); // collections here 
+      sequelize.addModels([Cities]); // collections here 
       await sequelize.sync();
       return sequelize;
     },
