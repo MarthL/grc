@@ -1,7 +1,7 @@
-import { Column, Table } from 'sequelize-typescript';
+import { Column, Table, Model } from 'sequelize-typescript';
 
 @Table
-class Cities {
+export class Cities extends Model<Cities> {
   @Column
   ville_id: number;
 
@@ -14,5 +14,3 @@ class Cities {
   @Column
   ville_code_postal: number;
 }
-
-export default Cities;

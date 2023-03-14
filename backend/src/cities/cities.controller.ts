@@ -1,4 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller('cities')
-export class CitiesController {}
+export class CitiesController {
+  @Get()
+  findAll(): string {
+    return 'All cities are returned';
+  }
+}

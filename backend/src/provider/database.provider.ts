@@ -1,6 +1,5 @@
-/* eslint-disable prettier/prettier */
 import { Sequelize } from 'sequelize-typescript';
-import Cities from 'src/cities/cities.entity';
+import { Cities } from '../cities/cities.entity';
 
 export const databaseProviders = [
   {
@@ -11,9 +10,9 @@ export const databaseProviders = [
         host: 'localhost',
         port: 3306,
         username: 'root',
-        database: 'nest',
+        database: 'grc_city',
       });
-      sequelize.addModels([Cities]); // collections here 
+      sequelize.addModels([Cities]);
       await sequelize.sync();
       return sequelize;
     },
