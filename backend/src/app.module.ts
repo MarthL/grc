@@ -11,7 +11,7 @@ import { citiesProviders } from './cities/cities.provider';
 
 @Module({
   imports: [CitiesModule],
-  controllers: [],
+  controllers: [AppController],
   providers: [AppService, ...databaseProviders, ...citiesProviders],
   exports: [...databaseProviders],
 })

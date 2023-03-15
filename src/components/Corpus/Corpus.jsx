@@ -1,6 +1,8 @@
 // import { Typography } from "@mui/material";
+import { Api } from "@mui/icons-material";
 import { Container, TextField, Box, Button } from "@mui/material";
 import { React, useState, useEffect } from "react";
+import api from "api/api";
 
 
 const Corpus = () => { 
@@ -19,7 +21,13 @@ const Corpus = () => {
 
   useEffect(() => {
     setError(false);
+    api.get('/cities')
+      .then((res) => res.data)
+      .then((data) => data)
+      .catch((error) => console.error(error))
   }, [])
+
+
 
   return(
     <>
@@ -31,6 +39,8 @@ const Corpus = () => {
         onChange={(e) => setInput(e.target.value)}
         value={input}
         error={error}
+        // renderInput={(e) => {...option}}
+        option={['hello', 'test']}
       />
     </Box>
     <Box display="flex" alignItems="center" justifyContent="center">
