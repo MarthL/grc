@@ -7,7 +7,9 @@ const Corpus = () => {
 
   const [input, setInput] = useState('');
   const [error, setError] = useState(false);
+
   useEffect(() => {
+    setError(false);
     if(input.length > 2) { 
       setError(false);
     } else { 
@@ -15,12 +17,16 @@ const Corpus = () => {
     }
   }, [input])
 
+  useEffect(() => {
+    setError(false);
+  }, [])
+
   return(
     <>
     <Box sx={{width: "auto", textAlign: "center"}}> <h1>Statistiques Population</h1> </Box>
     <Box sx={{ my: '5vh', mx: 'auto', width: 200 }}>
       <TextField
-        helperText={error}
+        helperText={error ? error : "Please enter a city"}
         label="City"
         onChange={(e) => setInput(e.target.value)}
         value={input}
