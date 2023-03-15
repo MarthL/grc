@@ -6,8 +6,13 @@ import { React, useState, useEffect } from "react";
 const Corpus = () => { 
 
   const [input, setInput] = useState('');
+  const [error, setError] = useState(false);
   useEffect(() => {
-    console.log(input);
+    if(input.length > 2) { 
+      setError(false);
+    } else { 
+      setError('2 letters minimum');
+    }
   }, [input])
 
   return(
@@ -15,10 +20,11 @@ const Corpus = () => {
     <Box sx={{width: "auto", textAlign: "center"}}> <h1>Statistiques Population</h1> </Box>
     <Box sx={{ my: '5vh', mx: 'auto', width: 200 }}>
       <TextField
-        helperText="Enter a city"
+        helperText={error}
         label="City"
         onChange={(e) => setInput(e.target.value)}
         value={input}
+        error={error}
       />
     </Box>
     <Box display="flex" alignItems="center" justifyContent="center">
