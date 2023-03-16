@@ -35,7 +35,8 @@ const Corpus = (props) => {
   console.log(cities);
 
   const filterOptions = createFilterOptions({
-    limit: 10
+    limit: 20,
+    ignoreCase: true,
   })
 
   return(
@@ -44,7 +45,9 @@ const Corpus = (props) => {
     <Box sx={{ my: '5vh', mx: 'auto', width: 200 }}>
       <Autocomplete 
       filterOptions={filterOptions} 
-      options={cities.cities?.map((value)=> `${value.ville_code_postal} ${value.ville_nom}`)}
+      options={cities.cities?.map((value)=> `${value.ville_nom} ${value.ville_code_postal}`).sort((a, b) => {
+        return a > b
+    })}
       renderInput={(params) => <TextField {...params}
       label="City"
       value={input} 
