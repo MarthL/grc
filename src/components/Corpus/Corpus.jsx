@@ -21,9 +21,9 @@ const Corpus = () => {
 
   useEffect(() => {
     setError(false);
-    api.get('/cities/')
+    api.get('/cities')
       .then((res) => res.data)
-      .then((data) => data)
+      .then((data) => JSON.stringify(data))
       .catch((error) => console.error(error))
   }, [])
 
