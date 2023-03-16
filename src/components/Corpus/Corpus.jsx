@@ -1,14 +1,16 @@
 // import { Typography } from "@mui/material";
 import { Api } from "@mui/icons-material";
-import { Container, TextField, Box, Button } from "@mui/material";
+import { Container, TextField, Box, Button, Autocomplete, createFilterOptions } from "@mui/material";
 import { React, useState, useEffect } from "react";
 import api from "api/api";
 
 
-const Corpus = () => { 
+const Corpus = (props) => { 
 
   const [input, setInput] = useState('');
   const [error, setError] = useState(false);
+  const [cities, setCities] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setError(false);
@@ -19,28 +21,34 @@ const Corpus = () => {
     }
   }, [input])
 
-  useEffect(() => {
-    setError(false);
+  useEffect( () => {
     api.get('/cities')
       .then((res) => res.data)
-      .then((data) => JSON.stringify(data))
+      .then((data) => setCities((data)))
       .catch((error) => console.error(error))
+    setLoading(false);
   }, [])
 
+  // console.log('cities', cities.cities.map((value) => value.ville_nom));
+  // console.log(cities.cities?.map((value) => `${value.ville_code_postal} ${value.ville_nom}`))
+  // console.log(cities.cities?.map((value) => `${value.ville_code_postal} - ${value.ville_nom}`))
+  console.log(cities);
 
+  const filterOptions = createFilterOptions({
+    limit: 10
+  })
 
   return(
     <>
     <Box sx={{width: "auto", textAlign: "center"}}> <h1>Statistiques Population</h1> </Box>
     <Box sx={{ my: '5vh', mx: 'auto', width: 200 }}>
-      <TextField
-        helperText={error ? error : "Please enter a city"}
-        label="City"
-        onChange={(e) => setInput(e.target.value)}
-        value={input}
-        error={error}
-        // renderInput={(e) => {...option}}
-        option={['hello', 'test']}
+      <Autocomplete 
+      filterOptions={filterOptions} 
+      options={cities.cities?.map((value)=> `${value.ville_code_postal} ${value.ville_nom}`)}
+      renderInput={(params) => <TextField {...params}
+      label="City"
+      value={input} 
+      />}
       />
     </Box>
     <Box display="flex" alignItems="center" justifyContent="center">
