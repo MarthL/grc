@@ -11,6 +11,8 @@ const Corpus = (props) => {
   const [error, setError] = useState(false);
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedOption, setSelectedOption] = useState(null);
+
 
   useEffect(() => {
     setError(false);
@@ -19,6 +21,7 @@ const Corpus = (props) => {
     } else { 
       setError('2 letters minimum');
     }
+    console.log(input)
   }, [input])
 
   useEffect( () => {
@@ -29,30 +32,45 @@ const Corpus = (props) => {
     setLoading(false);
   }, [])
 
-  // console.log('cities', cities.cities.map((value) => value.ville_nom));
-  // console.log(cities.cities?.map((value) => `${value.ville_code_postal} ${value.ville_nom}`))
-  // console.log(cities.cities?.map((value) => `${value.ville_code_postal} - ${value.ville_nom}`))
-  console.log(cities);
-
   const filterOptions = createFilterOptions({
     limit: 20,
     ignoreCase: true,
   })
 
+  const handleInputChange = (event, newValue) => {
+    setInput(event.target.value);
+    console.log(newValue);
+  };
+
   return(
     <>
     <Box sx={{width: "auto", textAlign: "center"}}> <h1>Statistiques Population</h1> </Box>
     <Box sx={{ my: '5vh', mx: 'auto', width: 200 }}>
-      <Autocomplete 
-      filterOptions={filterOptions} 
-      options={cities.cities?.map((value)=> `${value.ville_nom} ${value.ville_code_postal}`).sort((a, b) => {
-        return a > b
-    })}
-      renderInput={(params) => <TextField {...params}
+    <Autocomplete 
+  filterOptions={filterOptions} 
+  options={cities.cities?.map((value)=> ({
+    id: value.id,
+    label: `${value.ville_nom} ${value.ville_code_postal}`
+  })).sort((a, b) => a.label.localeCompare(b.label)) || [] }
+  value={selectedOption}
+  onChange={(event, newValue) => {
+    setSelectedOption(newValue);
+    setInput(newValue.label);
+  }}
+  renderInput={(params) => (
+    <TextField
+      {...params}
       label="City"
-      value={input} 
-      />}
-      />
+      onChange={handleInputChange}
+      value={input}
+      inputProps={{
+        ...params.inputProps,
+        autoComplete: 'off' // disable autocomplete and autocorrect
+      }}
+    />
+  )}
+  getOptionLabel={(option) => option.label}
+/>
     </Box>
     <Box display="flex" alignItems="center" justifyContent="center">
       <Box sm={1} marginRight="10px">
@@ -62,7 +80,7 @@ const Corpus = (props) => {
       </Box>
       <Box sm={1}>
       <Button color="info" variant="contained"
-      onClick={() => setInput('')}
+      onClick={() => setSelectedOption(null)}
       >
         Reset
       </Button>
